@@ -19,6 +19,16 @@
       $question = htmlspecialchars($_POST["question"]);
       $gender = htmlspecialchars($_POST["gender"]);
 
+      //入力を確認する
+      if (preg_match("/^[a-zA-Z0-9._\-]+$/", $name)) {
+        echo "<p>名前：$name</p>";
+    } else {
+        echo "<p>名前は半角英数字および一部の記号のみで入力してください</p>";
+    }
+  　} else {
+        echo "<p>名前がありません</p>";
+  }
+
       echo "<p>名前：$name</p>";
       echo "<p>年齢：$age</p>";
       echo "<p>電話番号：$phone</p>";
