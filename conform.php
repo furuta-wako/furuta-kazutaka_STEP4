@@ -19,15 +19,39 @@
       $question = htmlspecialchars($_POST["question"]);
       $gender = htmlspecialchars($_POST["gender"]);
 
-      //入力を確認する
+      //入力を確認する:名前
       if (preg_match("/^[a-zA-Z0-9._\-]+$/", $name)) {
         echo "<p>名前：$name</p>";
     } else {
         echo "<p>名前は半角英数字および一部の記号のみで入力してください</p>";
     }
-  　} else {
-        echo "<p>名前がありません</p>";
-  }
+　　　// 入力チェック：年齢
+      if (filter_var($age, FILTER_VALIDATE_INT, ["options" => ["min_range" => 0, "max_range" => 150]])) {
+        echo "<p>年齢：$age</p>";
+    } else {
+        echo "<p>年齢は0〜150の数値で入力してください</p>";
+    }
+
+      // 入力チェック：電話番号
+      if (preg_match("/^[0-9\-]+$/", $phone)) {
+      echo "<p>電話番号：$phone</p>";
+    } else {
+      echo "<p>電話番号は数字とハイフンのみで入力してください</p>";
+    }
+
+      // 入力チェック：メールアドレス
+      if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo "<p>メールアドレス：$email</p>";
+    } else {
+      echo "<p>正しいメールアドレスを入力してください</p>";
+    }
+
+      // 入力チェック：住所
+      if (!empty($address)) {
+      echo "<p>住所：$address</p>";
+    } else {
+      echo "<p>住所を入力してください</p>";
+    }
 
       echo "<p>名前：$name</p>";
       echo "<p>年齢：$age</p>";
